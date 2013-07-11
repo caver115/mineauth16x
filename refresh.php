@@ -1,25 +1,23 @@
 <?php
 
-define('INCLUDE_CHECK',true);
+define('INCLUDE_CHECK', true);
 include ("include.php");
 
 
-if (  $json->accessToken &&  $json->clientToken ) {
-	$checkTokenResult = checkTokens( $json->accessToken, $json->clientToken );
+if ((defined('POST')) && ($json->accessToken && $json->clientToken)) {
+    $checkTokenResult = checkTokens($json->accessToken, $json->clientToken);
 
-    if ( $checkTokenResult ) {
+    if ($checkTokenResult) {
 
-    $aProfile = getAvailableProfiles ( $checkTokenResult );
-    $sProfile = getSelectedProfile( $checkTokenResult );
+        $aProfile = getAvailableProfiles($checkTokenResult);
+        $sProfile = getSelectedProfile($checkTokenResult);
 
 
-	$responce = array ('clientToken' => $json->clientToken, 'accessToken' => $json->accessToken, 'selectedProfile' => $sProfile );
-	encode_json($responce);
+        $responce = array('clientToken' => $json->clientToken, 'accessToken' => $json->accessToken, 'selectedProfile' => $sProfile);
+        encode_json($responce);
     }
-}else{
+} else {
     echo "auth failed";
     die;
 }
-
-
 ?>

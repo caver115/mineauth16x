@@ -13,6 +13,7 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `selectedprofile` varchar(255) DEFAULT NULL,
   `clientToken` varchar(255) DEFAULT NULL,
+  `serverId` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `mail` (`mail`)
 ) AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
