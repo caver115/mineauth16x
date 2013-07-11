@@ -9,9 +9,6 @@ if (  $json->accessToken &&  $json->clientToken ) {
 
     if ( $checkTokenResult ) {
 
-#	$accessToken = generate_accessToken( $checkTokenResult['mail'] );
-#	saveAccessToken( $accessToken, $checkTokenResult['mail'] );
-
     $aProfile = getAvailableProfiles ( $checkTokenResult );
     $sProfile = getSelectedProfile( $checkTokenResult );
 
