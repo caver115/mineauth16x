@@ -118,10 +118,24 @@ function joinServer($u, $t, $s) {
     $t = mysql_real_escape_string($t);
     $s = mysql_real_escape_string($s);
     $token = explode(":", $t);
-    
+
     $q = "update users u join profiles p on u.mail = p.mail set u.serverId = '$s' where ((u.accessToken = '$token[1]') and (p.nickname = '$u'))";
     $dbResult = mysql_query($q);
-        
+
+    if (mysql_affected_rows() == 1) {
+        return TRUE;
+    } else {
+        return FALSE;
+    }
+}
+
+function checkServer($u, $s) {
+    $u = mysql_real_escape_string($u);
+    $s = mysql_real_escape_string($s);
+
+    $q = "update users u join profiles p on u.mail = p.mail set u.serverId = '' where ((u.serverId = '$s') and (p.nickname = '$u'))";
+    $dbResult = mysql_query($q);
+
     if (mysql_affected_rows() == 1) {
         return TRUE;
     } else {

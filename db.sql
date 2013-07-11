@@ -3,7 +3,8 @@ CREATE TABLE `profiles` (
   `id` int(255) NOT NULL AUTO_INCREMENT,
   `nickname` varchar(255) NOT NULL,
   `mail` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `nickname` (`nickname`)
 ) AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `users` (
