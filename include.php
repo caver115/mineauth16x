@@ -1,5 +1,7 @@
 <?php
 
+define('DEBUG', TRUE);
+
 if (!defined('INCLUDE_CHECK'))
     die("You don't have permissions to run this");
 
@@ -109,6 +111,22 @@ function createDefaultProfile($u) {
     $dbResult = mysql_query("insert into profiles ( nickname, mail ) values ( '$nickname[0]', '$u' )");
     $id = mysql_insert_id();
     $dbResult = mysql_query("update users set selectedprofile = $id where lower(mail) = lower('$u') ");
+}
+
+function joinServer($u, $t, $s) {
+    $u = mysql_real_escape_string($u);
+    $t = mysql_real_escape_string($t);
+    $s = mysql_real_escape_string($s);
+    $token = explode(":", $t);
+    
+    $q = "update users u join profiles p on u.mail = p.mail set u.serverId = '$s' where ((u.accessToken = '$token[1]') and (p.nickname = '$u'))";
+    $dbResult = mysql_query($q);
+        
+    if (mysql_affected_rows() == 1) {
+        return TRUE;
+    } else {
+        return FALSE;
+    }
 }
 
 ?>
