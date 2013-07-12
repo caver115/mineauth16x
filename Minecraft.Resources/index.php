@@ -1,8 +1,8 @@
 <?php
 
-$directory = '/var/www/minecraft/htdocs/Minecraft.Resources';
-$scanned_directory = array_diff(scandir($directory), array('..', '.', 'index.php', 'i2.php'));
+$directory = dirname ( __FILE__ );
 
+$scanned_directory = array_diff(scandir($directory), array('..', '.', 'index.php'));
 
 $xmlstr = <<< XML
 <ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
@@ -14,10 +14,7 @@ $xmlstr = <<< XML
 </ListBucketResult>
 XML;
 
-
-
 $xml = new SimpleXMLElement($xmlstr);
-
 
 foreach ($scanned_directory as $file) {
     $contents = $xml->addChild('Contents');
@@ -28,5 +25,6 @@ foreach ($scanned_directory as $file) {
     $contents->addChild('StorageClass', 'STANDARD');
 }
 
-Header('Content-type: text/xml');
-print($xml->asXML());
+    Header('Content-type: text/xml');
+    print($xml->asXML());
+?>
