@@ -34,7 +34,6 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST' ) && (stripos($_SERVER["CONTENT_TYPE"]
 function encode_json($r) {
     $j = json_encode($r);
     echo $j;
-#    error_log(print_r($j,TRUE));
 }
 
 function checkUsernamePassword($u, $p) {
